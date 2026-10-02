@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bqvpyi8c6l5s2"]
+
+[ext_resource type="Script" uid="uid://5gcqnywd5hgd" path="res://addons/jdi_tools_old/dialog/dialog.gd" id="1_rja8n"]
+
+[node name="Dialog" type="Control" unique_id=1891309926]
+custom_minimum_size = Vector2(475, 160)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_rja8n")
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=685067611]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+current_tab = 0
+drag_to_rearrange_enabled = true
+
+[node name="New" type="FileDialog" parent="." unique_id=1958568657]
+title = "Create A New Dialogue File"
+initial_position = 4
+size = Vector2i(1000, 500)
+dialog_hide_on_ok = true
+mode_overrides_title = false
+filters = PackedStringArray("*.gd")
+
+[node name="Load" type="FileDialog" parent="." unique_id=390446198]
+auto_translate_mode = 1
+title = "Open A Dialogue File"
+initial_position = 4
+size = Vector2i(1000, 500)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+mode_overrides_title = false
+file_mode = 0
+filters = PackedStringArray("*.gd")
+
+[node name="Save As" type="FileDialog" parent="." unique_id=1655135511]
+auto_translate_mode = 1
+title = "Save Dialogue File As"
+initial_position = 4
+size = Vector2i(1000, 500)
+dialog_hide_on_ok = true
+mode_overrides_title = false
+filters = PackedStringArray("*.gd")
+
+[connection signal="file_selected" from="New" to="." method="_on_new_file_selected"]
+[connection signal="file_selected" from="Load" to="." method="_on_load_file_selected"]
+[connection signal="file_selected" from="Save As" to="." method="_on_save_as_file_selected"]

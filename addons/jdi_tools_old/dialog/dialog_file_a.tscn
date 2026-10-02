@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://cakfxpyicjhld"]
+
+[ext_resource type="Script" uid="uid://bnwbqpm7vjrm2" path="res://addons/jdi_tools_old/dialog/dialog_file.gd" id="1_t5r1f"]
+[ext_resource type="Script" uid="uid://bwx2uyoitgb02" path="res://addons/jdi_tools_old/dialog/compiler.gd" id="2_vao2f"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_id0yv"]
+device = -1
+alt_pressed = true
+ctrl_pressed = true
+keycode = 78
+unicode = 110
+
+[sub_resource type="Shortcut" id="Shortcut_4sdb8"]
+events = [SubResource("InputEventKey_id0yv")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_35awg"]
+device = -1
+alt_pressed = true
+ctrl_pressed = true
+keycode = 76
+unicode = 108
+
+[sub_resource type="Shortcut" id="Shortcut_y3sb3"]
+events = [SubResource("InputEventKey_35awg")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_05jlx"]
+device = -1
+alt_pressed = true
+ctrl_pressed = true
+keycode = 83
+unicode = 115
+
+[sub_resource type="Shortcut" id="Shortcut_agtn0"]
+events = [SubResource("InputEventKey_05jlx")]
+
+[node name="DialogFile" type="HBoxContainer" unique_id=329199389]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t5r1f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1451134689]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+
+[node name="new" type="Button" parent="VBoxContainer" unique_id=2111300889]
+layout_mode = 2
+shortcut = SubResource("Shortcut_4sdb8")
+text = "New
+"
+
+[node name="load" type="Button" parent="VBoxContainer" unique_id=463698377]
+layout_mode = 2
+shortcut = SubResource("Shortcut_y3sb3")
+text = "Load
+"
+
+[node name="save" type="Button" parent="VBoxContainer" unique_id=1623817863]
+layout_mode = 2
+disabled = true
+shortcut = SubResource("Shortcut_agtn0")
+text = "Save"
+
+[node name="save_as" type="Button" parent="VBoxContainer" unique_id=956759611]
+layout_mode = 2
+text = "Save As"
+
+[node name="close" type="Button" parent="VBoxContainer" unique_id=708253574]
+layout_mode = 2
+text = "Close
+"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=1034382451]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DialogEdit" type="CodeEdit" parent="HSplitContainer" unique_id=180604798]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Char1:hi
+Await
+Char2:hello
+Await
+Wait[1]
+Char1:yeet!
+Char2:yett"
+context_menu_enabled = false
+middle_mouse_paste_enabled = false
+virtual_keyboard_enabled = false
+minimap_draw = true
+draw_control_chars = true
+draw_tabs = true
+draw_spaces = true
+gutters_draw_line_numbers = true
+auto_brace_completion_enabled = true
+
+[node name="Code" type="CodeEdit" parent="HSplitContainer" unique_id=1990665604]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
+virtual_keyboard_enabled = false
+draw_control_chars = true
+draw_tabs = true
+draw_spaces = true
+line_folding = true
+gutters_draw_line_numbers = true
+gutters_draw_fold_gutter = true
+
+[node name="Compiler" type="Node" parent="." unique_id=2058847630]
+script = ExtResource("2_vao2f")
+
+[connection signal="pressed" from="VBoxContainer/new" to="." method="_on_new_pressed"]
+[connection signal="pressed" from="VBoxContainer/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="VBoxContainer/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="VBoxContainer/save_as" to="." method="_on_save_as_pressed"]
+[connection signal="pressed" from="VBoxContainer/close" to="." method="_on_close_pressed"]

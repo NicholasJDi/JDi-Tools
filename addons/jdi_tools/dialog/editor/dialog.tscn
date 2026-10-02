@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://cqdj77y87pf7r"]
+
+[ext_resource type="Script" uid="uid://cqyrfngc55vck" path="res://addons/jdi_tools/dialog/editor/dialog.gd" id="1_k6fti"]
+[ext_resource type="Script" uid="uid://bn2yrf5vjugs5" path="res://addons/jdi_tools/dialog/editor/tree.gd" id="2_qlwd5"]
+[ext_resource type="Script" uid="uid://dnewlp8y0t2ia" path="res://addons/jdi_tools/dialog/editor/dialog_tree.gd" id="3_gisc1"]
+[ext_resource type="Script" uid="uid://cre8q6eh6mrr3" path="res://addons/jdi_tools/dialog/editor/character_tree.gd" id="4_doeqn"]
+
+[node name="Dialog" type="Control" unique_id=878749419]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_k6fti")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=567604694]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(247)
+split_offset = 247
+
+[node name="Tree" type="MarginContainer" parent="HSplitContainer" unique_id=1884463868]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_qlwd5")
+
+[node name="Panel" type="Panel" parent="HSplitContainer/Tree" unique_id=537470186]
+layout_mode = 2
+
+[node name="Dialog" type="VBoxContainer" parent="HSplitContainer/Tree" unique_id=1511046602]
+visible = false
+layout_mode = 2
+script = ExtResource("3_gisc1")
+
+[node name="TextEdit" type="TextEdit" parent="HSplitContainer/Tree/Dialog" unique_id=531106119]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "dialog"
+
+[node name="Character" type="VBoxContainer" parent="HSplitContainer/Tree" unique_id=1295954868]
+visible = false
+layout_mode = 2
+script = ExtResource("4_doeqn")
+
+[node name="TextEdit" type="TextEdit" parent="HSplitContainer/Tree/Character" unique_id=413841179]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "char"
+
+[node name="Side" type="PanelContainer" parent="HSplitContainer" unique_id=1223794664]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Side" unique_id=23535882]
+layout_mode = 2
+
+[node name="File" type="FoldableContainer" parent="HSplitContainer/Side/VBoxContainer" unique_id=701268948]
+layout_mode = 2
+title = "File"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Side/VBoxContainer/File" unique_id=1730733546]
+layout_mode = 2
+
+[node name="Save" type="Button" parent="HSplitContainer/Side/VBoxContainer/File/VBoxContainer" unique_id=253293152]
+layout_mode = 2
+tooltip_text = "Save the currently loaded JDiDialog or JDiDialogCharacter"
+text = "Save"
+
+[node name="SaveAs" type="Button" parent="HSplitContainer/Side/VBoxContainer/File/VBoxContainer" unique_id=1084026604]
+layout_mode = 2
+tooltip_text = "Save the currently loaded JDiDialog or JDiDialogCharacter as a new file"
+text = "Save As"
+
+[node name="Load" type="Button" parent="HSplitContainer/Side/VBoxContainer/File/VBoxContainer" unique_id=1673008687]
+layout_mode = 2
+tooltip_text = "Load a JDiDialog or JDiDialogCharacter into the editor"
+text = "Load"
+
+[node name="Close" type="Button" parent="HSplitContainer/Side/VBoxContainer/File/VBoxContainer" unique_id=273729169]
+layout_mode = 2
+tooltip_text = "Close a JDiDialog or JDiDialogCharacter"
+text = "Close"
+
+[node name="NewDialog" type="Button" parent="HSplitContainer/Side/VBoxContainer/File/VBoxContainer" unique_id=230663418]
+layout_mode = 2
+tooltip_text = "Create a new JDiDialog"
+text = "New Dialog"
+
+[node name="NewCharacter" type="Button" parent="HSplitContainer/Side/VBoxContainer/File/VBoxContainer" unique_id=64899138]
+layout_mode = 2
+tooltip_text = "Create a new JDiDialogCharacter"
+text = "New Character"

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cq8p8ufvn6ttk"]
+
+[ext_resource type="PackedScene" uid="uid://cqdj77y87pf7r" path="res://addons/jdi_tools/dialog/editor/dialog.tscn" id="1_ccen4"]
+[ext_resource type="Script" uid="uid://bfeyi2rug0nlv" path="res://addons/jdi_tools/jdi_tools.gd" id="1_nbjps"]
+
+[node name="JDi Tools" type="Control" unique_id=1394104881]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_nbjps")
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1390645285]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 14
+current_tab = 0
+
+[node name="Dialog" parent="TabContainer" unique_id=1764555686 instance=ExtResource("1_ccen4")]
+layout_mode = 2
+metadata/_tab_index = 0
