@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://chclml4ber7o5" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://dsp1fyk1yugtb" path="res://addons/jdi_tools/dialog/dialog_box.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bhpm35buddo18" path="res://addons/jdi_tools/dialog/dialog_bubble.gd" id="3_h2yge"]
 
 [node name="Main" type="Control" unique_id=324069452]
 layout_mode = 3
@@ -20,7 +21,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_0xm2m")
-title_locked = null
 metadata/_custom_type_script = "uid://dsp1fyk1yugtb"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="DialogBox" unique_id=1075424246]
@@ -34,5 +34,22 @@ text = "Text mehehe"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogBox" unique_id=704658259]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=91782822]
-pitch_scale = 0.01
+[node name="DialogBubble" type="Control" parent="." unique_id=323316683]
+anchors_preset = 0
+offset_left = 433.0
+offset_top = 298.0
+offset_right = 433.0
+offset_bottom = 298.0
+script = ExtResource("3_h2yge")
+metadata/_custom_type_script = "uid://bhpm35buddo18"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DialogBubble" unique_id=338606410]
+layout_mode = 0
+offset_left = 22.0
+offset_top = -74.0
+offset_right = 249.0
+offset_bottom = -25.0
+text = "text aaaaaaaaaaaaaaaaaaaa
+eeeeeeeeeeeeeeeeeee"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogBubble" unique_id=1234887530]

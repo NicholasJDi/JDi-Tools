@@ -1,3 +1,4 @@
+@icon("dialog.png")
 @abstract
 class_name DialogObserver
 extends Control
@@ -5,11 +6,18 @@ extends Control
 ##
 ## Abstract base class for anything that observes JDiDialog events, resolves and responds to node events and allows skipping.
 
+## The id of this observer[br][br]
+## [b]Note:[/b] When a incoming node specifies an observer id that is not this one it is ignored.
+@export var id: String
 ## What [member JDiDialogCharacter.name]'s this observer handles.[br][br]
-## [b]Note:[/b] When empty accepts all events
+## [b]Note:[/b] When empty accepts all events regardless of characters
 @export var characters: Array[String]
 ## When [code]true[/code] makes any checks against [member characters] require all checks to be met instead of just one.
 @export var enforce_characters: bool
+## When [code]true[/code] makes it so any incoming node must specify this observer.
+@export var enforce_id: bool
+## When [code]true[/code] makes it so this observer only responds when the specified observer type in a node is the same as [method get_observer_type]
+@export var enforce_type: bool
 ## When a node is received bind to that [param title] until the matching [signal DialogManager.tree_finished]
 @export var title_locked := true
 
@@ -28,6 +36,12 @@ func _ready() -> void:
 
 
 func _on_node_changed(title: String, new_node: Dictionary, node_index: int) -> void:
+	if enforce_type and new_node.get("type","") != get_observer_type():
+		return
+	var observer: String = new_node.get("observer","")
+	if (observer or enforce_id) and observer != id:
+		return
+	
 	var character = new_node.get("character")
 	if not characters.is_empty() and not characters.has(character):
 		return
@@ -35,6 +49,7 @@ func _on_node_changed(title: String, new_node: Dictionary, node_index: int) -> v
 		_title = title
 	if title_locked and _title != title:
 			return
+	
 	var state := title + str(node_index)
 	_states[state] = 1
 	DialogManager.observer_started.emit(title, characters, node_index, self)
@@ -68,7 +83,7 @@ func _on_tree_finished(title: String) -> void:
 	_tree_finished(title)
 
 
-## Run whenever a JDiDialog node changes
+## Run whenever a JDiDialog node changes.
 func _node_changed(title: String, node: Dictionary, character: JDiDialogCharacter, index: int) -> void:
 	_states[title + str(index)] = 2
 
@@ -78,7 +93,7 @@ func _dialog_skipped(title: String, related_characters: Array[String], index: in
 	pass
 
 
-## Run whenever a JDiDialog tree ends
+## Run whenever a JDiDialog tree ends.
 func _tree_finished(title: String) -> void:
 	pass
 

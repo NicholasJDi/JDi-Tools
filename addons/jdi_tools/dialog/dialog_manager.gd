@@ -97,7 +97,7 @@ func run(tree: JDiDialog):
 		}
 		
 		node_changed.emit(title, compacted, index)
-		if compacted.instant == true:
+		if compacted.instant:
 			var character = compacted.get("character", "")
 			if character:
 				character = [character]
@@ -105,6 +105,8 @@ func run(tree: JDiDialog):
 				character = []
 			dialog_skipped.emit(title, character, index, null)
 		
-		while not (data[title].finished == true or data[title].finished == null) and data[title].count is int and not compacted.get("continue"):
+		if compacted.get("continue"):
+			continue
+		while not (data[title].finished == true or data[title].finished == null) and data[title].count is int:
 			await get_tree().process_frame
 	data.erase(title)

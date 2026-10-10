@@ -12,7 +12,9 @@ extends DialogObserver
 ## If [member stream_player]'s sounds should be instantly stopped when the node ends.
 @export var stop_sounds_on_end: bool
 
+## The initial [member AudioStreamPlayer.volume_linear] of [member stream_player]
 var default_volume: float
+## The initial [member AudioStreamPlayer.pitch_scale] of [member stream_player]
 var default_pitch: float
 
 ## The label that [DialogBox] uses to render text.
@@ -31,9 +33,9 @@ func _init() -> void:
 
 func _ready() -> void:
 	update_configuration_warnings()
-	label = get_label()
 	if Engine.is_editor_hint():
 		return
+	label = get_label()
 	if not label:
 		printerr("DialogBox '" + name + "' could not find valid RichTextLabel")
 	stream_player = get_stream_player()
@@ -42,6 +44,7 @@ func _ready() -> void:
 	else:
 		default_volume = stream_player.volume_linear
 		default_pitch = stream_player.pitch_scale
+
 
 
 func _node_changed(title: String, node: Dictionary, character: JDiDialogCharacter, index: int) -> void:
@@ -89,6 +92,15 @@ func _dialog_skipped(title: String, related_characters: Array[String], index: in
 	timer.timeout.emit()
 
 
+func _tree_finished(title: String) -> void:
+	timer.stop()
+	label.visible_ratio = 1
+	timer.timeout.emit()
+	label.text = ""
+
+
+## Gets the child [RichTextLabel] of this [DialogBox].[br][br]
+## [b]Note:[/b] Returns null if there is not exactly one direct [RichTextLabel] child.
 func get_label() -> RichTextLabel:
 	var labels := find_children("*", "RichTextLabel", false, false)
 	if labels.size() == 1:
@@ -96,6 +108,8 @@ func get_label() -> RichTextLabel:
 	return
 
 
+## Gets the child [AudioStreamPlayer] of this [DialogBox].[br][br]
+## [b]Note:[/b] Returns null if there is not exactly one direct [AudioStreamPlayer] child.
 func get_stream_player() -> AudioStreamPlayer:
 	var players := find_children("*", "AudioStreamPlayer", false, false)
 	if players.size() == 1:
@@ -103,6 +117,7 @@ func get_stream_player() -> AudioStreamPlayer:
 	return
 
 
+## Gets the type name of this observer.
 func get_observer_type() -> String:
 	return "box"
 
@@ -120,6 +135,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("DialogBox requires a direct RichTextLabel child.")
 	elif labels.size() > 1:
 		warnings.append("DialogBox can only have one direct RichTextLabel child.")
+	
 	var players := find_children("*", "AudioStreamPlayer", false, false)
 	if players.is_empty():
 		warnings.append("DialogBox requires a direct AudioStreamPlayer child.")
