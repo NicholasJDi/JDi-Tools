@@ -15,10 +15,12 @@ func _disable_plugin() -> void:
 func _enter_tree() -> void:
 	EditorInterface.get_editor_main_screen().add_child(mainpanel)
 	_make_visible(false)
+	add_autoload_singleton("SettingsManager", "settings/settings_manager.gd")
 	add_autoload_singleton("DialogManager", "dialog/dialog_manager.gd")
 
 
 func _exit_tree() -> void:
+	remove_autoload_singleton("SettingsManager")
 	remove_autoload_singleton("DialogManager")
 
 
